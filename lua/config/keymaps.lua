@@ -7,12 +7,6 @@ local map = vim.keymap.set
 
 -- Global Text Search Cmd + Shift + F
 
-map("n", "<D-S-F>", function()
+map("n", "<CSF>", function()
   vim.cmd(":Telescope find_files")
 end, { desc = "Globally search for text", noremap = true, silent = true })
-
--- Next Buffer: Cmd + Shift + }
-
-map("n", "<leader>r", function()
-  vim.cmd(":source %")
-end, { desc = "Reload lua configuration" })
