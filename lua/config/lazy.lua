@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local colorscheme = "darcula-dark"
+local colorscheme = "catppuccin-frappe"
 
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
