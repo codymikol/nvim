@@ -5,12 +5,12 @@
 
 local map = vim.keymap.set
 
--- Global File Search Cmd + Shift + O
-map("n", "<C-S-O>", function()
+-- Global File Search Cmd + O
+map("n", "<C-O>", function()
   vim.cmd(":Telescope find_files")
 end, { desc = "Globally search for files", silent = true })
 
--- Global Text Search Cmd + Shift + F
-map("n", "<C-S-F>", function()
+-- Global Text Search Cmd + F
+map("n", "<C-F>", function()
   vim.cmd(":Telescope live_grep")
 end, { desc = "Globally search for text", silent = true })
