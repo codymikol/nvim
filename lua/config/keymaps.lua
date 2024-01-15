@@ -14,3 +14,9 @@ end, { desc = "Globally search for files", silent = true })
 map("n", "<C-F>", function()
   vim.cmd(":Telescope live_grep")
 end, { desc = "Globally search for text", silent = true })
+
+-- Open Projects Window
+
+map("n", "<C-P>", function()
+  vim.cmd(":Telescope workspaces")
+end)
