@@ -39,4 +39,5 @@ require("lazy").setup({
   },
 })
 
+vim.opt.swapfile = false
 vim.cmd.colorscheme(colorscheme)
