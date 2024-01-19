@@ -10,16 +10,15 @@ return {
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-emoji",
+    event = "InsertEnter",
+    dependencies = { "hrsh7th/cmp-emoji" },
+    opts = {
+      mapping = require("cmp").mapping.preset.insert({
+        ["<TAB>"] = require("cmp").mapping.confirm({
+          select = false,
+          behavior = require("cmp").ConfirmBehavior.Replace,
+        }),
+      }),
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local cmp = require("cmp")
-
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-      })
-    end,
   },
 }
