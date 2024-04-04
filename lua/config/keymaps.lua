@@ -6,30 +6,17 @@
 local map = vim.keymap.set
 
 -- Global File Search Ctrl + O
-map("n", "<C-O>", function()
+map("n", "<Space>gf", function()
   vim.cmd(":Telescope find_files")
 end, { desc = "Globally search for files", silent = true })
 
 -- Global Text Search Ctrl + F
-map("n", "<C-F>", function()
+map("n", "<Space>gt", function()
   vim.cmd(":Telescope live_grep")
 end, { desc = "Globally search for text", silent = true })
 
 -- Open Projects Window
 
-map("n", "<C-P>", function()
+map("n", "<Space>p", function()
   vim.cmd(":Telescope workspaces")
-end)
-
--- Close current tab, or more specifically, go to the next buffer and close the previous.
-
-map("n", "<C-c>", function()
-  vim.cmd(":w")
-  --TODO: this cannot close buffers that are not writeable.
-  vim.cmd(":bnext | bdelete #")
-end)
-
-map("n", "<C-x>", function()
-  vim.cmd(":wa")
-  vim.cmd(":qa!")
 end)
