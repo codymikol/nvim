@@ -20,3 +20,8 @@ end, { desc = "Globally search for text", silent = true })
 map("n", "<Space>p", function()
   vim.cmd(":Telescope workspaces")
 end)
+
+-- Open Termianl
+map("n", "<Space>t", function()
+  vim.cmd(":terminal")
+end)
