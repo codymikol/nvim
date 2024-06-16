@@ -1,7 +1,7 @@
 return {
   "nvim-neotest/neotest",
   dependencies = {
-    { dir = "~/dev/src/neotest-kotest" },
+    { dir = "~/dev/src/neotest-kotest.nvim" },
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
