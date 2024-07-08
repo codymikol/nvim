@@ -21,7 +21,14 @@ map("n", "<Space>p", function()
   vim.cmd(":Telescope workspaces")
 end)
 
--- Open Termianl
-map("n", "<Space>t", function()
-  vim.cmd(":terminal")
+map("n", "<leader>tp", function()
+  vim.cmd("w | PlenaryBustedFile %")
+end)
+
+map("n", "<leader>tn", function()
+  vim.cmd("w | Neotest run")
+end)
+
+map("n", "<leader>ts", function()
+  vim.cmd("w | Neotest summary")
 end)
