@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim",                                import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "plugins" },
@@ -40,4 +40,4 @@ require("lazy").setup({
 })
 
 vim.opt.swapfile = false
--- vim.cmd.colorscheme(colorscheme)
+vim.cmd.colorscheme(colorscheme)

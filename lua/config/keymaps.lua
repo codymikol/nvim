@@ -32,3 +32,12 @@ end)
 map("n", "<leader>ts", function()
   vim.cmd("w | Neotest summary")
 end)
+
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+
+-- Disable docs on F1
+vim.api.nvim_set_keymap('n', '<F1>', '<Nop>', { noremap = true, silent = true })
