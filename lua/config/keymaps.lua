@@ -42,6 +42,7 @@ vim.g.copilot_no_tab_map = true
 
 -- Disable docs on F1
 vim.api.nvim_set_keymap('n', '<F1>', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<F1>', '<Nop>', { noremap = true, silent = true })
 
 -- Refactoring.nvim
 
@@ -58,3 +59,15 @@ vim.keymap.set({ "n", "x" }, "<leader>ri", function() require('refactoring').ref
 vim.keymap.set("n", "<leader>rb", function() require('refactoring').refactor('Extract Block') end)
 vim.keymap.set("n", "<leader>rbf", function() require('refactoring').refactor('Extract Block To File') end)
 -- Extract block supports only normal mode
+
+-- Buffer Maps
+
+map("n", "<leader>bo", function ()
+  -- write a function that will delete all buffers except the one open
+  local current_buf = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current_buf and vim.api.nvim_buf_get_option(buf, 'buftype') == '' then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end, { desc = "Close other buffers" })
