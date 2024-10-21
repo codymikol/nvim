@@ -1,0 +1,26 @@
+{
+  "describe": {
+    "scope": "lua",
+    "prefix": "de",
+    "body": "describe(\"${1:description}\", function() \n${0}\nend)",
+    "description": "Creates a describe block"
+  },
+  "it": {
+    "scope": "lua",
+    "prefix": "it",
+    "body": "it(\"${1:description}\", function() \n${0}\nend)",
+    "description": "Creates an it block"
+  },
+  "afterEach": {
+    "scope": "lua",
+    "prefix": "ae",
+    "body": "afterEach(\"${1:description}\", function() \n${0:body}\nend)",
+    "description": "Creates an afterEach block"
+  },
+  "beforeEach": {
+    "scope": "lua",
+    "prefix": "be",
+    "body": "beforeEach(\"${1:description}\", function() \n${0:body}\nend)",
+    "description": "Creates a beforeEach block"
+  }
+}
