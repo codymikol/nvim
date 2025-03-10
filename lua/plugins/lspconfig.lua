@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    config = function()
+  config = function()
       print("heating up")
       local busted_types_path = vim.fn.expand("./types/busted.lua")
 
@@ -32,6 +32,7 @@ return {
       require("lspconfig").nil_ls.setup({})
       require("lspconfig").kotlin_language_server.setup({})
       require("lspconfig").terraform_lsp.setup({})
+      require("lspconfig").gopls.setup({})
     end,
   },
 }
