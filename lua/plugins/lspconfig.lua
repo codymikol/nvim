@@ -2,7 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
   config = function()
-      print("heating up")
       local busted_types_path = vim.fn.expand("./types/busted.lua")
 
       local runtime_files = vim.api.nvim_get_runtime_file("", true)
