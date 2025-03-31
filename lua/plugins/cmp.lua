@@ -1,37 +1,34 @@
 return {
   "hrsh7th/nvim-cmp",
   opts = function(_, opts)
+
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
-    opts.mapping["<CR>"] = cmp.mapping(function(fallback)
-      if luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
-      elseif cmp.visible() then
-        cmp.confirm({ select = true })
-      else
-        fallback()
-      end
-    end)
+    opts.mapping = {
+      -- <Tab> confirms the selection and replaces what is in front of the cursor
+      ["<Tab>"] = cmp.mapping(function(fallback)
 
-    opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-      if luasnip.locally_jumpable(1) then
-        luasnip.jump(1)
-      elseif cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" })
+        vim.notify("Tab pressed")
 
-    opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" })
+        if cmp.visible() then
+          cmp.confirm({ select = true, replace = true }) -- Confirms the current selection and replaces what is in front
+        elseif luasnip.locally_jumpable(1) then
+          luasnip.jump(1) -- Jump forward in snippet
+        else
+          fallback() -- Fallback behavior (default action)
+        end
+      end, { "i", "s" }),
+
+      -- <CR> confirms the selection and prepends it to what is in front of the cursor
+      ["<CR>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.confirm({ select = true, prepend = true }) -- Confirms the selection and prepends it to what is in front
+        else
+          fallback() -- Fallback behavior (default action)
+        end
+      end, { "i", "s" }),
+    }
+
   end,
 }
