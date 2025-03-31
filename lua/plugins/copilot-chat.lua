@@ -7,7 +7,7 @@ return {
     },
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
-      debug = true, -- Enable debugging
+      model = "gpt-4o-2024-11-20",
     },
   },
 }
