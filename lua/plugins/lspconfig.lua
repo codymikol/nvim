@@ -1,7 +1,16 @@
 return {
   {
     "neovim/nvim-lspconfig",
-  config = function()
+    dependencies = { 'saghen/blink.cmp' },
+    opts = {
+      servers = {
+        nil_ls = {},
+        kotlin_language_server = {},
+        terraform_lsp = {},
+        gopls = {},
+      }
+    },
+    config = function(_, opts)
       local busted_types_path = vim.fn.expand("./types/busted.lua")
 
       local runtime_files = vim.api.nvim_get_runtime_file("", true)
@@ -28,10 +37,21 @@ return {
           },
         },
       })
-      require("lspconfig").nil_ls.setup({})
-      require("lspconfig").kotlin_language_server.setup({})
-      require("lspconfig").terraform_lsp.setup({})
-      require("lspconfig").gopls.setup({})
+
+      -- This adds autocompletion from blink.nvim to all of our LSP server configurations :)
+      local lspconfig = require('lspconfig')
+
+      for server, config in pairs(opts.servers) do
+        -- passing config.capabilities to blink.cmp merges with the capabilities in your
+        -- `opts[server].capabilities, if you've defined it
+        config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+        if nil ~= lspconfig[server].setup then
+          lspconfig[server].setup(config)
+        else
+          vim.notify("LSP server " .. server .. " not found")
+        end
+      end
+
     end,
   },
 }
