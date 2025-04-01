@@ -8,6 +8,15 @@ return {
         kotlin_language_server = {},
         terraform_lsp = {},
         gopls = {},
+        tsserver = {},
+        volar = {
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
+          },
+        }
       }
     },
     config = function(_, opts)
