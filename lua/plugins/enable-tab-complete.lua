@@ -8,17 +8,17 @@ return {
     end,
   },
   -- then: setup supertab in cmp
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    opts = {
-      mapping = require("cmp").mapping.preset.insert({
-        ["<TAB>"] = require("cmp").mapping.confirm({
-          select = false,
-          behavior = require("cmp").ConfirmBehavior.Replace,
-        }),
-      }),
-    },
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   event = "InsertEnter",
+  --   dependencies = { "hrsh7th/cmp-emoji" },
+  --   opts = {
+  --     mapping = require("cmp").mapping.preset.insert({
+  --       ["<TAB>"] = require("cmp").mapping.confirm({
+  --         select = false,
+  --         behavior = require("cmp").ConfirmBehavior.Replace,
+  --       }),
+  --     }),
+  --   },
+  -- },
 }
