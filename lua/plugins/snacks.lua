@@ -1,11 +1,24 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    gh = {},
+        picker = {
+      sources = {
+        gh_issue = {
+          -- your gh_issue picker configuration comes here
+          -- or leave it empty to use the default settings
+        },
+        gh_pr = {
+          -- your gh_pr picker configuration comes here
+          -- or leave it empty to use the default settings
+        }
+      }
+    },
     dashboard = {
       sections = {
         { section = "header" },
         { section = "keys", gap = 1, padding = 1 },
-       --  { section = "startup" },
+        --  { section = "startup" },
       },
       preset = {
         pick = function(cmd, opts)
