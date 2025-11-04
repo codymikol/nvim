@@ -1,6 +1,25 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    terminal = {
+      win = {
+        show = true,
+        fixbuf = true,
+        relative = "editor",
+        position = "float",
+        minimal = true,
+        wo = {
+          winhighlight = "Normal:SnacksNormal,NormalNC:SnacksNormalNC,WinBar:SnacksWinBar,WinBarNC:SnacksWinBarNC,FloatTitle:SnacksTitle,FloatFooter:SnacksFooter,WinSeparator:SnacksWinSeparator",
+        },
+        bo = {},
+        title_pos = "center",
+        keys = {
+          q = "close",
+        },
+        footer_pos = "center",
+        footer_keys = false,
+      }
+    },
     gh = {},
         picker = {
       sources = {
