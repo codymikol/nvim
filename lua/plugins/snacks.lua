@@ -65,4 +65,16 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    local snacks = require("snacks")
+    snacks.setup(opts)
+    _G.Snacks = snacks
+    vim.ui.select = snacks.picker.select
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        vim.ui.select = snacks.picker.select
+      end,
+    })
+  end,
 }
