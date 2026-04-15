@@ -23,3 +23,15 @@ vim.api.nvim_create_autocmd("User", {
 end
     end,
   })
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
+    callback = function()
+        vim.lsp.buf.format()
+    end,
+})
+
+vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+    pattern = "*",
+    command = "silent! wall"
+})
+
