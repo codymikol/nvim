@@ -4,11 +4,32 @@ return {
     dependencies = { "saghen/blink.cmp" },
     opts = {
       servers = {
-        nil_ls = {},
-        kotlin_language_server = {},
+        nil_ls = {
+          settings = {
+            ['nil'] = {
+              formatting = {
+                command = { "nixfmt" },
+              },
+            },
+          }
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = false,
+              },
+              validate = true,
+              completion = true,
+              hover = true,
+            },
+          },
+        },
         terraform_lsp = {},
         gopls = {},
         tsserver = {},
+        denols = {},
+        rust_analyzer = {},
         volar = {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           init_options = {
@@ -20,6 +41,17 @@ return {
       },
     },
     config = function(_, opts)
+
+      -- Slowing EVERYTHING down, just disabling for now.....
+
+      --[[ -- Not actually related to lspconfig, but its fine...
+      vim.lsp.enable('kotlin-lsp')
+
+      vim.lsp.config('kotlin-lsp', {
+        cmd = { 'nc', 'localhost', '9999' },
+      })
+]]
+
       local busted_types_path = vim.fn.expand("./types/busted.lua")
 
       local runtime_files = vim.api.nvim_get_runtime_file("", true)
@@ -58,7 +90,6 @@ return {
         if server ~= "stylua" and server ~= "*" and nil ~= lspconfig[server] and nil ~= lspconfig[server].setup then
           lspconfig[server].setup(config)
         else
-          vim.notify("LSP server " .. server .. " not found")
         end
       end
     end,
