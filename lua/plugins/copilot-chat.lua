@@ -7,14 +7,14 @@ return {
       width = 0.8, -- Fixed width in columns
       height = 0.8, -- Fixed height in rows
       border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
-      title = '🤖 AI Assistant',
+      title = '� AI Assistant',
       zindex = 100, -- Ensure window stays on top
     },
 
     headers = {
       user = '🫠🧠 Cody The Human',
-      assistant = '😈 Lying Machine 9001',
-      tool = '🔧 Tool',
+      assistant = '👹 Lying Machine 9001',
+      tool = '🪓 Tool',
     },
 
     separator = '━━',
@@ -25,5 +25,9 @@ return {
       { "github/copilot.vim" },
     },
     build = "make tiktoken", -- Only on MacOS or Linux
+    config = function(_, opts)
+      require("CopilotChat").setup(opts)
+      vim.api.nvim_exec_autocmds("User", { pattern = "CopilotChatLoaded" }) -- This is for my chat alias...
+    end,
   },
 }
