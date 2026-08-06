@@ -48,7 +48,7 @@ return {
           local pick_projects = function()
             local universes = multiverse_repository.getMultiverse().universes
             if #universes == 0 then
-              vim.notify("You don't have any universes to explore!")
+              vim.notify("You don't have any universes to explore!", vim.log.levels.WARN)
               return
             end
             Snacks.picker.select(multiverse_dashboard.most_recent(universes, #universes), {

@@ -4,6 +4,9 @@ local M = {}
 ---@param limit number
 ---@return multiverse.UniverseSummary[]
 function M.most_recent(universes, limit)
+  -- shallow copy: keeps the same universe objects so that later mutations
+  -- (e.g. multiverse_manager.load_universe updating lastExplored) write
+  -- back to the entries multiverse persists, not a throwaway clone.
   local sorted = {}
   for i, universe in ipairs(universes) do
     sorted[i] = universe
