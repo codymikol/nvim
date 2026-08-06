@@ -6,3 +6,8 @@ debug
 foo.*
 *.log
 data
+harness.env
+logs/
+prompts/
+.envrc
+.direnv
