@@ -8,6 +8,5 @@ foo.*
 data
 harness.env
 logs/
-prompts/
 .envrc
 .direnv
