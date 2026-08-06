@@ -36,6 +36,18 @@ describe("multiverse_dashboard.most_recent", function()
 
     assert.are.same(1, #result)
   end)
+
+  it("preserves object identity so mutations write back to the source list", function()
+    local universes = {
+      { name = "a", lastExplored = 1 },
+      { name = "b", lastExplored = 2 },
+    }
+
+    local result = multiverse_dashboard.most_recent(universes, 5)
+    result[1].lastExplored = 999
+
+    assert.are.same(999, universes[2].lastExplored)
+  end)
 end)
 
 describe("multiverse_dashboard.project_keys", function()
@@ -65,5 +77,22 @@ describe("multiverse_dashboard.project_keys", function()
     items[2].action()
 
     assert.are.same({ "two" }, opened)
+  end)
+end)
+
+describe("multiverse_dashboard.dashboard_keys", function()
+  it("puts New File first and Projects last, wrapping the project keys", function()
+    local universes = { { name = "one", lastExplored = 1 } }
+    local pick = function() end
+
+    local items = multiverse_dashboard.dashboard_keys(universes, function() end, pick)
+
+    assert.are.same("n", items[1].key)
+    assert.are.same("New File", items[1].desc)
+    assert.are.same("1", items[2].key)
+    assert.are.same("one", items[2].desc)
+    assert.are.same("p", items[3].key)
+    assert.are.same("Projects", items[3].desc)
+    assert.are.same(pick, items[3].action)
   end)
 end)

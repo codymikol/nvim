@@ -4,7 +4,10 @@ local M = {}
 ---@param limit number
 ---@return multiverse.UniverseSummary[]
 function M.most_recent(universes, limit)
-  local sorted = vim.deepcopy(universes)
+  local sorted = {}
+  for i, universe in ipairs(universes) do
+    sorted[i] = universe
+  end
   table.sort(sorted, function(a, b)
     return a.lastExplored > b.lastExplored
   end)
@@ -31,6 +34,24 @@ function M.project_keys(universes, open)
       end,
     }
   end
+  return items
+end
+
+---@param recent_universes multiverse.UniverseSummary[]
+---@param open fun(universe: multiverse.UniverseSummary)
+---@param pick_projects fun()
+---@return snacks.dashboard.Item[]
+function M.dashboard_keys(recent_universes, open, pick_projects)
+  local items = {
+    { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+  }
+
+  for _, item in ipairs(M.project_keys(recent_universes, open)) do
+    table.insert(items, item)
+  end
+
+  table.insert(items, { icon = " ", key = "p", desc = "Projects", action = pick_projects })
+
   return items
 end
 
