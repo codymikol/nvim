@@ -3,6 +3,9 @@ return {
   opts = {
     filesystem = {
       window = {
+        position = "left", -- or "right"
+        width = 30,        -- set your preferred width
+        auto_expand_width = false, -- disables auto full-screen expansion
         mappings = {
           ["S"] = function(state)
               local node = state.tree:get_node()
