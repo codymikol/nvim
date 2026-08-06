@@ -10,8 +10,8 @@ return function(map)
     vim.cmd(":Octo pr browser")
   end, { desc = "Open the current pull request in a browser" })
 
-  map("n", "<Space>gpd", function()
-    vim.cmd(":Octo pr diff")
-  end, { desc = "Show a diff of the current pull request" })
+  map("n", "<space>gpd", function()
+    vim.cmd(":octo pr diff")
+  end, { desc = "show a diff of the current pull request" })
 
 end
