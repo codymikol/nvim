@@ -32,7 +32,7 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "type": "github"
- vim.api.nvim_list_bufs()     }
+      }
     },
     "flake-parts_2": {
       "inputs": {

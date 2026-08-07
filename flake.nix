@@ -27,19 +27,21 @@
         {
           spindrift = {
 
-            packages = p: [ p.neovim ];
+            infra.image = {
+              packages = p: [ p.neovim ];
+              prefetch = "nvim --headless '+Lazy! sync' +qa";
+            };
 
-            prefetch = "nvim --headless '+Lazy! sync' +qa";
+            agents.prompt = builtins.readFile ./prompts/issue-prompt.md;
 
-            prompt = builtins.readFile ./prompts/issue-prompt.md;
+            forge = {
+              backend = "github";
+              repoSlug = "codymikol/nvim";
+            };
 
-            settings = {
-              repository = {
-                codeForge = "github";
-                repoSlug = "codymikol/nvim";
-                gitUserName = "bot";
-                gitUserEmail = "hi@codymikol.com";
-              };
+            git.user = {
+              name = "bot";
+              email = "hi@codymikol.com";
             };
           };
 
