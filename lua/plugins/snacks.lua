@@ -36,7 +36,41 @@ return {
     dashboard = {
       sections = {
         { section = "header" },
-        { section = "keys", gap = 1, padding = 1 },
+        function(self)
+          local multiverse_dashboard = require("config.multiverse_dashboard")
+          local multiverse_repository = require("multiverse.repositories.multiverse_repository")
+          local multiverse_manager = require("multiverse.managers.multiverse_manager")
+
+          local open = function(universe_summary)
+            multiverse_manager.load_universe(multiverse_repository.getMultiverse(), universe_summary)
+          end
+
+          local pick_projects = function()
+            local universes = multiverse_repository.getMultiverse().universes
+            if #universes == 0 then
+              vim.notify("You don't have any universes to explore!", vim.log.levels.WARN)
+              return
+            end
+            Snacks.picker.select(multiverse_dashboard.most_recent(universes, #universes), {
+              prompt = "Projects",
+              format_item = function(universe)
+                return universe.name
+              end,
+            }, function(selected)
+              if selected then
+                open(selected)
+              end
+            end)
+          end
+
+          local recent = multiverse_dashboard.most_recent(multiverse_repository.getMultiverse().universes, 5)
+          local items = multiverse_dashboard.dashboard_keys(recent, open, pick_projects)
+
+          items.gap = 1
+          items.padding = 1
+
+          return items
+        end,
         --  { section = "startup" },
       },
       preset = {
@@ -49,19 +83,6 @@ return {
 | |_) | |_| | (_| | \__ \ | | | | | (_| \__ \ | | |  __/ |   
 |_.__/ \__,_|\__, | |___/_| |_| |_|\__,_|___/_| |_|\___|_|   
              |___/                                           ]],
-        -- stylua: ignore
-        ---@type snacks.dashboard.Item[]
-        keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-          { icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" }, 
-          { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
-          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-        },
       },
     },
   },
