@@ -46,15 +46,17 @@ return {
 
       -- This adds autocompletion from blink.nvim to all of our LSP server configurations :)
       local lspconfig = require("lspconfig")
+      local lsp = require("config.lsp")
 
       for server, config in pairs(opts.servers) do
-        -- passing config.capabilities to blink.cmp merges with the capabilities in your
-        -- `opts[server].capabilities, if you've defined it
-        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+        if lsp.is_server_enabled(config) then
+          -- passing config.capabilities to blink.cmp merges with the capabilities in your
+          -- `opts[server].capabilities, if you've defined it
+          config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 
-        if server ~= "stylua" and server ~= "*" and nil ~= lspconfig[server] and nil ~= lspconfig[server].setup then
-          lspconfig[server].setup(config)
-        else
+          if server ~= "stylua" and server ~= "*" and nil ~= lspconfig[server] and nil ~= lspconfig[server].setup then
+            lspconfig[server].setup(config)
+          end
         end
       end
     end,
