@@ -36,7 +36,10 @@ return {
     dashboard = {
       sections = {
         { section = "header" },
-        function(self)
+        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+        { icon = " ", key = "p", desc = "Projects", action = function() vim.cmd("MultiverseList") end },
+        { padding = 2 },
+        function()
           local multiverse_dashboard = require("config.multiverse_dashboard")
           local multiverse_repository = require("multiverse.repositories.multiverse_repository")
           local multiverse_manager = require("multiverse.managers.multiverse_manager")
@@ -45,33 +48,15 @@ return {
             multiverse_manager.load_universe(multiverse_repository.getMultiverse(), universe_summary)
           end
 
-          local pick_projects = function()
-            local universes = multiverse_repository.getMultiverse().universes
-            if #universes == 0 then
-              vim.notify("You don't have any universes to explore!", vim.log.levels.WARN)
-              return
-            end
-            Snacks.picker.select(multiverse_dashboard.most_recent(universes, #universes), {
-              prompt = "Projects",
-              format_item = function(universe)
-                return universe.name
-              end,
-            }, function(selected)
-              if selected then
-                open(selected)
-              end
-            end)
-          end
-
           local recent = multiverse_dashboard.most_recent(multiverse_repository.getMultiverse().universes, 5)
-          local items = multiverse_dashboard.dashboard_keys(recent, open, pick_projects)
+          local items = multiverse_dashboard.dashboard_keys(recent, open)
 
           items.gap = 1
           items.padding = 1
 
           return items
         end,
-        --  { section = "startup" },
+        { section = "startup" },
       },
       preset = {
         pick = function(cmd, opts)

@@ -1,5 +1,13 @@
 return function(map)
 
+  -- Floating terminal (override LazyVim default)
+  map({ "n", "t" }, "<C-/>", function()
+    vim.cmd(":MultiverseTerminal")
+  end, { desc = "MultiverseTerminal" })
+  map({ "n", "t" }, "<C-_>", function()
+    vim.cmd(":MultiverseTerminal")
+  end, { desc = "which_key_ignore" })
+
   -- Open Projects Window
   map("n", "<Space>p", function()
     vim.cmd(":MultiverseList")
