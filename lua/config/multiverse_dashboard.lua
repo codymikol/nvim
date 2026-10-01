@@ -44,16 +44,16 @@ end
 ---@param open fun(universe: multiverse.UniverseSummary)
 ---@param pick_projects fun()
 ---@return snacks.dashboard.Item[]
-function M.dashboard_keys(recent_universes, open, pick_projects)
+function M.dashboard_keys(recent_universes, open)
   local items = {
-    { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+    -- { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
   }
 
   for _, item in ipairs(M.project_keys(recent_universes, open)) do
     table.insert(items, item)
   end
 
-  table.insert(items, { icon = " ", key = "p", desc = "Projects", action = pick_projects })
+  -- table.insert(items, { icon = " ", key = "p", desc = "Projects", action = function() vim.cmd("MultiverseList") end })
 
   return items
 end
