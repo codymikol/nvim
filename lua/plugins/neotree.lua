@@ -7,6 +7,14 @@ return {
         width = 30,        -- set your preferred width
         auto_expand_width = false, -- disables auto full-screen expansion
         mappings = {
+          ["<Space>gt"] = function(state)
+            local node = state.tree:get_node()
+            if node.type == "directory" then
+              require("fzf-lua").grep_project({ cwd = node:get_id() })
+            else
+              require("fzf-lua").grep_project()
+            end
+          end,
           ["S"] = function(state)
               local node = state.tree:get_node()
               if node.type == "directory" then
